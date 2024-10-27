@@ -1,88 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dialog Editor</title>
-        <meta name="description" content="Growtopia dialog editor with live preview fiture.">
-        <meta name="keywords" content="gtps, gtps3, GOLDPS, gtps4, growtopia private server, growtopia private, growtopia server, growtopia proxy, growtopia forums, growtopia internal, growtopia hack, growtopia account, growtools, gtpshax, editor, dialog editor, growplus">
-        <meta name="author" content="GrowPlus">
-        <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
-        <link href="/styles.css" rel="stylesheet">
-        <link href="/dialog.css" rel="stylesheet">
-        <script src="/dialog.js"></script>
-        <script src="/editor.js"></script>
-    </head>
-    <body>
-        <header>
-            <a href="https://discord.com/invite/D7wCQV8YCr" class="logo-wrapper" target="_blank">
-                <img src="/assets/logo.png" alt="Logo">
-                <h1>Dialog Editor</h1>
-            </a>
-            <a href="https://saweria.co/GrowPlus" target="_blank">
-                <div class="saweria-wrapper">
-                    <div class="saweria">
-                        <img src="https://saweria.co/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcapy_happy.603c7293.svg&w=640&q=75" alt="Saweria logo">
-                        Support Us
-                    </div>
-                </div>
-            </a>
-        </header>
-        <main>
-            <div class="editor-wrapper">
-                <div class="editor">
-                    <div class="setting">
-                        <div class="checkbox">
-                            <input type="checkbox" id="live" name="live" onclick="toggle()">
-                            <label for="live">Live Preview</label>
-                        </div>
-                        <div class="btn">
-                            <button class="run-wrapper" onclick="copy()">
-                                <div class="run">
-                                    COPY
-                                </div>
-                            </button>
-                            <button class="run-wrapper" onclick="run()">
-                                <div class="run">
-                                    RUN
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                    <textarea id="code" spellcheck="false" placeholder="Start coding..." oninput="codeEditor()"></textarea>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dialog Editor</title>
+    <meta name="description" content="Growtopia dialog editor with live preview fiture.">
+    <meta name="keywords"
+        content="gtps, gtps3, GOLDPS, gtps4, growtopia private server, growtopia private, growtopia server, growtopia proxy, growtopia forums, growtopia internal, growtopia hack, growtopia account, growtools, gtpshax, editor, dialog editor, growplus">
+    <meta name="author" content="GrowPlus">
+    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/dialog.css" rel="stylesheet">
+    <script src="js/dialog.js"></script>
+    <script src="js/editor.js"></script>
+</head>
+
+<body>
+    <header>
+        <a href="https://discord.com/invite/D7wCQV8YCr" class="logo-wrapper" target="_blank">
+            <img src="assets/logo.png" alt="Logo">
+            <h1>Dialog Editor</h1>
+        </a>
+        <a href="https://saweria.co/GrowPlus" target="_blank">
+            <div class="saweria-wrapper">
+                <div class="saweria">
+                    <img src="https://saweria.co/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcapy_happy.603c7293.svg&w=640&q=75"
+                        alt="Saweria logo">
+                    Support Us
                 </div>
             </div>
-            <div class="preview-wrapper">
-                <div class="dialog-wrapper" id="preview">
-                    <div class="dialog quick_exit">&#10005</div>
-                    <div class="dialog" id="dialog">
-                        <div class="title">
-                            <img src="https://gtpshax.github.io/DialogGTPS/src/assets/items/32.png" alt="32">
-                            Welcome to Dialog Editor!
-                        </div>
+        </a>
+    </header>
+    <main>
+        <div class="editor-wrapper">
+            <div class="editor">
+                <div class="setting">
+                    <div class="checkbox">
+                        <input type="checkbox" id="live" name="live" onclick="toggle()">
+                        <label for="live">Live Preview</label>
+                    </div>
+                    <div class="btn">
+                        <button class="run-wrapper" onclick="copy()">
+                            <div class="run">
+                                COPY
+                            </div>
+                        </button>
+                        <button class="run-wrapper" onclick="run()">
+                            <div class="run">
+                                RUN
+                            </div>
+                        </button>
                     </div>
                 </div>
-                <div class="editor-wrapper respo">
-                    <div class="editor setting" style="flex-direction: row;">
-                        <button class="saweria-wrapper" onclick="saveImage()">
-                            <div class="saweria">
-                                Save preview as image
-                            </div>
-                        </button>
-                        <button class="saweria-wrapper" onclick="saveFile()">
-                            <div class="saweria">
-                                Save code as file
-                            </div>
-                        </button>
-                        <button class="saweria-wrapper" onclick="">
-                            <div class="saweria">
-                                Configuration
-                            </div>
-                        </button>
+                <textarea id="code" spellcheck="false" placeholder="Start coding..." oninput="codeEditor()"></textarea>
+            </div>
+        </div>
+        <div class="preview-wrapper">
+            <div class="dialog-wrapper" id="preview">
+                <div class="dialog quick_exit">&#10005</div>
+                <div class="dialog" id="dialog">
+                    <div class="title">
+                        <img src="assets/wrench.png" alt="32">
+                        Welcome to Dialog Editor!
                     </div>
                 </div>
             </div>
-        </main>
-    </body>
+            <div class="editor-wrapper respo">
+                <div class="editor setting" style="flex-direction: row;">
+                    <button class="saweria-wrapper" onclick="saveImage()">
+                        <div class="saweria">
+                            Save preview as image
+                        </div>
+                    </button>
+                    <button class="saweria-wrapper" onclick="saveFile()">
+                        <div class="saweria">
+                            Save code as file
+                        </div>
+                    </button>
+                    <button class="saweria-wrapper" onclick="">
+                        <div class="saweria">
+                            Configuration
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
 </html>

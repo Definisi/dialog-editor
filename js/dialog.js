@@ -24,19 +24,19 @@ function saveImage() {
     dialog.propt.style.setProperty("--toggle-render", "visible");
     dialog.propt.style.setProperty("--render-width", "700px");
     dialog.propt.style.setProperty("--render-height", "unset");
-    setTimeout(()=>{
+    setTimeout(() => {
         domtoimage.toPng(document.getElementById("preview"))
-        .then((dataUrl) => {
-            let link = document.createElement('a');
-            link.download = 'dialog.png';
-            link.href = dataUrl;
-            link.click();
-            
-            dialog.propt.style.setProperty("--toggle-render", "auto");
-            dialog.propt.style.setProperty("--render-width", "100%");
-            dialog.propt.style.setProperty("--render-height", "40vh");
-        });
-        }, 300);
+            .then((dataUrl) => {
+                let link = document.createElement('a');
+                link.download = 'dialog.png';
+                link.href = dataUrl;
+                link.click();
+
+                dialog.propt.style.setProperty("--toggle-render", "auto");
+                dialog.propt.style.setProperty("--render-width", "100%");
+                dialog.propt.style.setProperty("--render-height", "40vh");
+            });
+    }, 300);
 }
 
 dialog.add("set_default_color", (data) => {
@@ -52,7 +52,7 @@ dialog.add("set_border_color", (data) => {
     let color = data[1].split(',');
     color[3] = color[3] / 255;
     data[1] = color.join(',');
-    
+
     dialog.propt.style.setProperty("--dialog-border", `rgba(${data[1]})`);
 });
 dialog.add("set_bg_color", (data) => {
@@ -61,7 +61,7 @@ dialog.add("set_bg_color", (data) => {
     color[3] = color[3] / 255;
     data[1] = color.join(',');
     console.log(data[1])
-    
+
     dialog.propt.style.setProperty("--dialog-bg", `rgba(${data[1]})`);
 });
 
@@ -97,46 +97,46 @@ dialog.add("add_spacer", (data) => {
 dialog.add("add_textbox", (data) => {
     if (data.length < 3) return;
     let text = data[1];
-    
+
     if (text.match("`")) {
         text = coloringText(text);
     }
-    
+
     dialog.value += `<p style="font-size: 1rem;${dialog.temp.css}">${text}<p>`
 })
 
 dialog.add("add_label", (data) => {
     if (data.length < 5) return;
     const small = (data[1] == "small" ? true : false);
-    
+
     let text = data[2];
-    
+
     if (text.match("`")) {
         text = coloringText(text);
     }
-    
+
     dialog.value += `<div style="font-size: ${small ? "1" : "1.3"}rem;${dialog.temp.css}" class="title"><p>${text}</p></div>`;
 });
 dialog.add("add_label_with_icon", (data) => {
     if (data.length < 6) return;
     const small = (data[1] == "small" ? true : false),
-    itemID = data[4];
-    
+        itemID = data[4];
+
     let text = data[2];
-    
+
     if (text.match("`")) {
         text = coloringText(text);
     }
-    
+
     dialog.value += `<div style="font-size: ${small ? "1" : "1.3"}rem;${dialog.temp.css}" class="title"><img style="width: ${small ? "15" : "20"}px; height: auto;" src="https://gtpshax.github.io/DialogGTPS/src/assets/items/${itemID}.png" alt="${itemID}"><p>${text}</p></div>`;
 });
-dialog.add ("add", (data)=> {
+dialog.add("add", (data) => {
     if (!data[1]) return;
     dialog.value += data[1];
 })
 
 function getColor(type) {
-    switch(type) {
+    switch (type) {
         case "`1":
             return "#adf4ff";
         case "`2":
@@ -157,7 +157,7 @@ function getColor(type) {
             return "#ffee7d";
         case "`0": case "`w":
             return "#ffffff"
-        
+
         case "`!":
             return "#d1fff9";
         case "`@":
@@ -170,7 +170,7 @@ function getColor(type) {
             return "#b5ff97";
         case "`&":
             return "#feebff";
-            
+
         case "`o":
             return "#fce6ba";
         case "`p":
@@ -191,10 +191,10 @@ function getColor(type) {
             return "#9e9e9e";
         case "`c":
             return "#50ffff";
-        
+
         case "`ì":
             return "#ffe119";
-            
+
         default:
             return "var(--default_color)";
     }
@@ -202,18 +202,18 @@ function getColor(type) {
 
 function explode(text) {
     let parts = text.match(/(?:`[^\s]*\s*[^`]+|^[^`]+)/g);
-    
+
     let result = parts.map(part => {
         let colorMatch = part.match(/`[^\s]/);
         let color = colorMatch ? colorMatch[0] : '';
         let text = part.replace(/`[^\s]\s*/, '');
-        
+
         return {
             color: color,
             text: text.trim()
         };
     });
-    
+
     return result;
 }
 
@@ -240,55 +240,41 @@ function parseObj(input) {
 
 function parseCSS(styles) {
     if (!styles) return "";
+
+    const propertiesMap = {
+        'margin': ({ x, y }) => `margin-top: ${y / 150}in; margin-left: ${x / 150}in;`,
+        'padding': ({ x, y }) => `padding-top: ${y / 150}in; padding-left: ${x / 150}in;`,
+        'border': ({ x, y }) => `border-width: ${y / 150}in ${x / 150}in;`,
+        'borderWidth': ({ x, y }) => `border-width: ${y / 150}in ${x / 150}in;`,
+        'borderRadius': ({ x }) => `borderRadius: ${x}cm;`,
+        'outlineWidth': ({ x }) => `outlineWidth: ${x}cm;`,
+        'top': ({ y }) => `top: ${y};`,
+        'left': ({ x }) => `left: ${x};`,
+        'width': ({ x }) => `width: ${x}cm;`,
+        'height': ({ x }) => `height: ${x}cm;`,
+        'fontSize': ({ x }) => `fontSize: ${x}cm;`,
+        'lineHeight': ({ x }) => `lineHeight: ${x}cm;`,
+        'letterSpacing': ({ x }) => `letterSpacing: ${x}cm;`,
+        'color': ({ x, y }) => `color: rgba(${x}, ${y}, 255, 1);`,
+        'backgroundColor': ({ x, y }) => `backgroundColor: rgba(${x}, ${y}, 255, 1);`,
+        'borderColor': ({ x, y }) => `borderColor: rgba(${x}, ${y}, 255, 1);`,
+        'display': ({ x }) => `display: ${x};`,
+        'position': ({ x }) => `position: ${x};`,
+        'overflow': ({ x }) => `overflow: ${x};`,
+        'visibility': ({ x }) => `visibility: ${x};`,
+        'float': ({ x }) => `float: ${x};`,
+        'opacity': ({ x }) => `opacity: ${x};`,
+        'textAlign': ({ x }) => `textAlign: ${x};`,
+        'verticalAlign': ({ x }) => `verticalAlign: ${x};`,
+        'flex': ({ x }) => `flex: ${x};`,
+        'flexGrow': ({ x }) => `flexGrow: ${x};`,
+        'flexShrink': ({ x }) => `flexShrink: ${x};`,
+        'boxShadow': ({ x }) => `boxShadow: 0 0 ${x}px rgba(0, 0, 0, 0.5);`,
+        'textShadow': ({ x, y }) => `textShadow: ${x}px ${y}px rgba(0, 0, 0, 0.5);`,
+    };
+
     return Object.entries(styles).map(([property, values]) => {
         const { x = 0, y = 0 } = values;
-
-        switch (property) {
-            case 'margin':
-                return `margin-top: ${y/150}in; margin-left: ${x/150}in;`;
-            case 'padding':
-                return `padding-top: ${y/150}in; padding-left: ${x/150}in;`;
-            case 'border':
-            case 'borderWidth':
-                return `border-width: ${y/150}in ${x/150}in;`;
-            case 'borderRadius':
-            case 'outlineWidth':
-                return `${property}: ${x}cm;`;
-            case 'top':
-                return `top: ${y};`;
-            case 'left':
-                return `left: ${x};`;
-            case 'width':
-            case 'height':
-            case 'fontSize':
-            case 'lineHeight':
-            case 'letterSpacing':
-                return `${property}: ${x}cm;`;
-            case 'color':
-            case 'backgroundColor':
-            case 'borderColor':
-                return `${property}: rgba(${x}, ${y}, 255, 1);`;
-            case 'display':
-            case 'position':
-            case 'overflow':
-            case 'visibility':
-            case 'float':
-                return `${property}: ${x};`;
-            case 'opacity':
-                return `${property}: ${x};`;
-            case 'textAlign':
-            case 'verticalAlign':
-                return `${property}: ${x};`;
-            case 'flex':
-            case 'flexGrow':
-            case 'flexShrink':
-                return `${property}: ${x};`;
-            case 'boxShadow':
-                return `${property}: 0 0 ${x}px rgba(0, 0, 0, 0.5);`;
-            case 'textShadow':
-                return `${property}: ${x}px ${y}px rgba(0, 0, 0, 0.5);`;
-            default:
-                return `${property}: ${x}px;`;
-        }
+        return propertiesMap[property] ? propertiesMap[property]({ x, y }) : `${property}: ${x}px;`;
     }).join(' ');
 }

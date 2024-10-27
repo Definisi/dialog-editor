@@ -4,9 +4,10 @@
     --toggle-render: auto;
     --render-width: 100%;
     --render-height: 40vh;
-    --dialog-bg: rgba(58,126,176,1);
+    --dialog-bg: rgba(58, 126, 176, 1);
     --dialog-border: #88B8CC;
 }
+
 .dialog-wrapper {
     position: relative;
     height: fit-content !important;
@@ -15,11 +16,12 @@
     overflow: var(--toggle-render);
     padding: 20px;
     box-sizing: border-box;
-    background-image: url("/assets/bg.jpeg");
+    background-image: url("../assets/bg.jpeg");
     background-position: center;
     background-size: cover;
     background-repeat: repeat;
 }
+
 .dialog {
     padding: 10px;
     height: fit-content;
@@ -35,6 +37,7 @@
     scrollbar-width: thin;
     scrollbar-color: #006a97 #00000000;
 }
+
 .dialog:before {
     content: '';
     width: 100%;
@@ -58,10 +61,12 @@
     width: fit-content;
     white-space: nowrap;
 }
-.title > img {
+
+.title>img {
     width: 20px;
 }
-.title > span {
+
+.title>span {
     white-space: nowrap;
 }
 

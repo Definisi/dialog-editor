@@ -1,7 +1,7 @@
 * {
     padding: 0;
     margin: 0;
-    font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; 
+    font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
 }
 
 body {
@@ -24,6 +24,7 @@ header {
     justify-content: space-between;
     color: #FFFDFF;
 }
+
 .logo-wrapper {
     width: fit-content;
     display: flex;
@@ -32,9 +33,11 @@ header {
     gap: 5px;
     font-size: .8rem;
 }
-.logo-wrapper > img {
+
+.logo-wrapper>img {
     height: 30px;
 }
+
 .saweria-wrapper {
     padding: 2px;
     border-radius: 5px;
@@ -43,6 +46,7 @@ header {
     border: none;
     color: #FFFDFF;
 }
+
 .saweria {
     padding: 10px;
     background: linear-gradient(120deg, #8989C7, #5C5984);
@@ -54,7 +58,8 @@ header {
     font-size: 1.2rem;
     gap: 5px;
 }
-.saweria > img {
+
+.saweria>img {
     width: 25px;
     height: auto;
 }
@@ -68,6 +73,7 @@ main {
     justify-content: space-between;
     gap: 20px;
 }
+
 .editor-wrapper {
     width: 50%;
     height: 100%;
@@ -76,12 +82,14 @@ main {
     box-shadow: 0 0 3px #434659;
     padding: 2px;
 }
+
 .editor::-webkit-scrollbar {
     all: unset;
     width: 0;
     height: 0;
     display: none;
 }
+
 .editor {
     height: 100%;
     background: linear-gradient(120deg, #434659, #2E303C);
@@ -91,6 +99,7 @@ main {
     flex-direction: column;
     overflow: hidden;
 }
+
 .setting {
     position: relative;
     padding: 10px;
@@ -99,6 +108,7 @@ main {
     justify-content: space-between;
     align-items: center;
 }
+
 .btn {
     width: fit-content;
     display: flex;
@@ -106,6 +116,7 @@ main {
     align-items: center;
     gap: 10px;
 }
+
 .checkbox {
     width: fit-content;
     display: flex;
@@ -113,9 +124,11 @@ main {
     gap: 5px;
     font-weight: 600;
 }
-.checkbox > input {
+
+.checkbox>input {
     background-color: #434659;
 }
+
 .run-wrapper {
     padding: 2px;
     border-radius: 5px;
@@ -124,6 +137,7 @@ main {
     border: none;
     color: #FFFDFF;
 }
+
 .run {
     padding: 10px;
     background: linear-gradient(120deg, #9eeecd, #5C9984);
@@ -137,7 +151,7 @@ main {
     transition: all .3s;
 }
 
-.editor > textarea {
+.editor>textarea {
     flex: 1;
     color: #c0ffe5;
     border: none;
@@ -153,7 +167,8 @@ main {
     scrollbar-color: #5dbb96 #2d2f4100;
 }
 
-textarea::-webkit-scrollbar-thumb, .dialog::-webkit-scrollbar-thumb {
+textarea::-webkit-scrollbar-thumb,
+.dialog::-webkit-scrollbar-thumb {
     border-radius: 5px !important;
 }
 
@@ -174,8 +189,9 @@ textarea::-webkit-scrollbar-thumb, .dialog::-webkit-scrollbar-thumb {
 
 .respo {
     height: fit-content;
-} 
-.respo > .setting {
+}
+
+.respo>.setting {
     height: unset;
     max-height: unset;
     padding: 0;
@@ -183,17 +199,22 @@ textarea::-webkit-scrollbar-thumb, .dialog::-webkit-scrollbar-thumb {
     grid-template-columns: repeat(3, 1fr);
     overflow: hidden;
 }
-.respo > .editor > button {
+
+.respo>.editor>button {
     height: 100% !important;
     border-radius: 0;
 }
-.respo > .editor > button > div {
+
+.respo>.editor>button>div {
     height: 100% !important;
     border-radius: 0;
     box-sizing: border-box;
 }
 
-a:hover, button:hover, input[type=checkbox]:hover, label:hover {
+a:hover,
+button:hover,
+input[type=checkbox]:hover,
+label:hover {
     opacity: .7;
     cursor: pointer;
 }
@@ -202,18 +223,24 @@ a:hover, button:hover, input[type=checkbox]:hover, label:hover {
     body {
         height: 100dvh;
     }
+
     main {
         flex-direction: column-reverse;
     }
-    .editor-wrapper, .preview-wrapper {
+
+    .editor-wrapper,
+    .preview-wrapper {
         width: 100%;
     }
-    .editor > textarea {
+
+    .editor>textarea {
         height: 80%;
     }
+
     .editor-wrapper:nth-child(2) {
         max-height: 30%;
     }
+
     .dialog-wrapper {
         flex: 1;
     }
